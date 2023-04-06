@@ -17,19 +17,24 @@ def get_products(request):
     if "search" in params:
         search = params.get('search')
         filters&=Q(Q(description__icontains=search) | Q(name__icontains=search))
-    if "categories" in params:
-        categories = params.get('categories')
-        filters&=Q(Q(description__icontains=search) | Q(name__icontains=search))
+    if "category" in params:
+        category = params.get('category')
+        if category=="2":
+            filters&=Q(category="Kurtis")
+        if category=="3":
+            filters&=Q(category="Leggings")
+        if category=="4":
+            filters&=Q(category="Accessories")
     if "sort_by" in params:
         sort_by = params.get('sort_by')
         if sort_by=="1": #price low to high
-            objects = Products.objects.filter(filters).values('name','description','ratings','image','mrp','disc','sale_price').order_by('sale_price')
+            objects = Products.objects.filter(filters).values('id','name','description','ratings','image','mrp','disc','sale_price','category').order_by('sale_price')
         if sort_by=="2": #price high to low
-            objects = Products.objects.filter(filters).values('name','description','ratings','image','mrp','disc','sale_price').order_by('-sale_price')
+            objects = Products.objects.filter(filters).values('id','name','description','ratings','image','mrp','disc','sale_price','category').order_by('-sale_price')
         if sort_by=="3": #discount low to high
-            objects = Products.objects.filter(filters).values('name','description','ratings','image','mrp','disc','sale_price').order_by('disc')
+            objects = Products.objects.filter(filters).values('id','name','description','ratings','image','mrp','disc','sale_price','category').order_by('disc')
         if sort_by=="4":
-            objects = Products.objects.filter(filters).values('name','description','ratings','image','mrp','disc','sale_price').order_by('-disc')
+            objects = Products.objects.filter(filters).values('id','name','description','ratings','image','mrp','disc','sale_price','category').order_by('-disc')
         return Response({"data":objects},status=200)
     # objects = Products.objects.filter(filters).values('name','description','ratings','image','mrp','disc','sale_price')
     # # if len(search)==0:

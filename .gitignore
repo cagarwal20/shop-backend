@@ -1,0 +1,7 @@
+.sqlite3
+**/__pycache__/
+.DS_Store
+.AppleDouble
+.LSOverride
+.env.prod
+.env.prod.db
