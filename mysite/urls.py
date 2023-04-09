@@ -20,5 +20,6 @@ import products.views as pviews
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('__debug__/', include('debug_toolbar.urls')),
-    path('get_products/',pviews.get_products)
+    path('get_products/',pviews.get_products),
+    path('product_detail/',pviews.product_detail)
 ]

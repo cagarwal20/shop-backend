@@ -16,6 +16,7 @@ class Products(models.Model):
     disc=models.IntegerField(default=0)
     sale_price=models.FloatField(default=0)
     category = models.CharField(max_length=20,choices=CATEGORY_CHOICES,default="Kurtis")
+    
     def __str__(self):
         return self.name
 

@@ -43,3 +43,10 @@ def get_products(request):
     # #     # print(ser_data.data)
     # # objects = Products.objects.filter(Q(description__icontains=search) | Q(name__icontains=search)).values('name','description','ratings','image','mrp','disc','sale_price')
     # return Response({"data":objects},status=200)
+@api_view(['GET'])
+@ratelimit(key='ip', rate='5/m',  method='GET',block=False) #block=true to implement this
+def product_detail(request):
+    id = request.GET.get('id')
+    product = Products.objects.filter(id=id)
+    data = product.values('category', 'description', 'disc', 'id', 'image', 'mrp', 'name', 'ratings', 'sale_price')
+    return Response({"data":data},status=200)
