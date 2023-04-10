@@ -48,5 +48,5 @@ def get_products(request):
 def product_detail(request):
     id = request.GET.get('id')
     product = Products.objects.filter(id=id)
-    data = product.values('category', 'description', 'disc', 'id', 'image', 'mrp', 'name', 'ratings', 'sale_price')
+    data = product.values('category', 'description', 'disc', 'id', 'image', 'mrp', 'name', 'ratings', 'sale_price','sizes','feature')
     return Response({"data":data},status=200)
